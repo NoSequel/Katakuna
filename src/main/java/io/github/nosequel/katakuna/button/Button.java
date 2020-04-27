@@ -44,6 +44,13 @@ public interface Button {
     Material getMaterial();
 
     /**
+     * Get the data of the button
+     *
+     * @return the data
+     */
+    byte getData();
+
+    /**
      * Get the action which will be executed upon click
      *
      * @return the action
@@ -59,6 +66,7 @@ public interface Button {
         final ItemStack itemStack = new ItemStack(this.getMaterial());
         final ItemMeta itemMeta = itemStack.getItemMeta();
 
+        itemStack.getData().setData(this.getData());
         itemMeta.setDisplayName(this.getDisplayName());
         itemMeta.setLore(this.getLore());
 

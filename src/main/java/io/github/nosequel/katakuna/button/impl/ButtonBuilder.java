@@ -17,6 +17,7 @@ public class ButtonBuilder implements Button {
     private List<String> lore = new ArrayList<>();
 
     private Material material;
+    private byte data;
     private String displayName;
 
     private int index;
@@ -28,6 +29,7 @@ public class ButtonBuilder implements Button {
      */
     public ButtonBuilder(Material material) {
         this.material = material;
+        this.data = 0;
         this.displayName = "";
         this.index = 0;
         this.action = humanEntity -> {
@@ -102,6 +104,18 @@ public class ButtonBuilder implements Button {
      */
     public ButtonBuilder setLore(String... lore) {
         this.lore = new ArrayList<>(Arrays.asList(lore));
+
+        return this;
+    }
+
+    /**
+     * Sets the data of a Button
+     *
+     * @param data the data
+     * @return the current ButtonBuilder instance
+     */
+    public ButtonBuilder setData(byte data) {
+        this.data = data;
 
         return this;
     }
