@@ -26,7 +26,7 @@ public class PaginationButton implements Button {
      * @param menu the menu
      */
     public PaginationButton(int index, PaginationType type, PaginatedMenu menu) {
-        this.byte = 0x0;
+        this.data = 0x0;
         this.index = index;
         this.displayName = type.equals(PaginationType.NEXT) ? ChatColor.GRAY + "Next Page" : ChatColor.GRAY + "Previous Page";
         this.material = Material.CARPET;
