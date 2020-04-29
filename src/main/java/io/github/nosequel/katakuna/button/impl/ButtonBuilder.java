@@ -21,6 +21,7 @@ public class ButtonBuilder implements Button {
     private String displayName;
 
     private int index;
+    private int amount;
 
     /**
      * Constructor for creating a new ButtonBuilder with default values
@@ -116,6 +117,12 @@ public class ButtonBuilder implements Button {
      */
     public ButtonBuilder setData(byte data) {
         this.data = data;
+
+        return this;
+    }
+
+    public ButtonBuilder setAmount(int amount) {
+        this.amount = amount;
 
         return this;
     }

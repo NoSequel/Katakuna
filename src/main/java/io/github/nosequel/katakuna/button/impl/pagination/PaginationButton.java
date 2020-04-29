@@ -13,6 +13,8 @@ import java.util.function.Consumer;
 public class PaginationButton implements Button {
 
     private int index;
+    private int amount = 1;
+
     private String displayName;
     private Material material;
     private Consumer<Player> action;

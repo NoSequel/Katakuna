@@ -58,15 +58,21 @@ public interface Button {
     Consumer<Player> getAction();
 
     /**
+     * Get the amount of the item
+     *
+     * @return the amount
+     */
+    int getAmount();
+
+    /**
      * Change a Button into an ItemStack
      *
      * @return the item stack
      */
     default ItemStack toItemStack() {
-        final ItemStack itemStack = new ItemStack(this.getMaterial());
+        final ItemStack itemStack = new ItemStack(this.getMaterial(), this.getAmount(), this.getData());
         final ItemMeta itemMeta = itemStack.getItemMeta();
 
-        itemStack.getData().setData(this.getData());
         itemMeta.setDisplayName(this.getDisplayName());
         itemMeta.setLore(this.getLore());
 
