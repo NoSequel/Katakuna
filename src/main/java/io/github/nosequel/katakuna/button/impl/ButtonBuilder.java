@@ -4,6 +4,8 @@ import io.github.nosequel.katakuna.button.Button;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,11 +19,13 @@ public class ButtonBuilder implements Button {
     private List<String> lore = new ArrayList<>();
 
     private Material material;
-    private byte data;
-    private String displayName;
+    private ItemStack itemStack;
 
-    private int index;
-    private int amount;
+    private String displayName = "";
+    private byte data = 0;
+    private int index = 0;
+    private int amount = 0;
+
 
     /**
      * Constructor for creating a new ButtonBuilder with default values
@@ -30,9 +34,6 @@ public class ButtonBuilder implements Button {
      */
     public ButtonBuilder(Material material) {
         this.material = material;
-        this.data = 0;
-        this.displayName = "";
-        this.index = 0;
         this.action = humanEntity -> {
         };
     }
@@ -47,6 +48,10 @@ public class ButtonBuilder implements Button {
         this.action = button.getAction();
         this.displayName = button.getDisplayName();
         this.index = button.getIndex();
+    }
+
+    public ButtonBuilder(ItemStack itemStack) {
+        this.itemStack = itemStack;
     }
 
     /**
@@ -127,4 +132,23 @@ public class ButtonBuilder implements Button {
         return this;
     }
 
+    /**
+     * Change a Button into an ItemStack
+     *
+     * @return the item stack
+     */
+    public ItemStack toItemStack() {
+        if (this.itemStack == null) {
+            return Button.super.toItemStack();
+        }
+
+        final ItemMeta meta = this.itemStack.getItemMeta();
+
+        meta.setDisplayName(this.getDisplayName());
+        meta.setLore(this.getLore());
+
+        this.itemStack.setItemMeta(meta);
+
+        return this.itemStack;
+    }
 }
