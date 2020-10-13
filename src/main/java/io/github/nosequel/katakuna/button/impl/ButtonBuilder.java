@@ -1,21 +1,22 @@
 package io.github.nosequel.katakuna.button.impl;
 
 import io.github.nosequel.katakuna.button.Button;
+import io.github.nosequel.katakuna.button.Callback;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Getter
 public class ButtonBuilder implements Button {
 
-    private Consumer<Player> action;
+    private Callback<ClickType, Player> action;
     private List<String> lore = new ArrayList<>();
 
     private Material material;
@@ -34,8 +35,7 @@ public class ButtonBuilder implements Button {
      */
     public ButtonBuilder(Material material) {
         this.material = material;
-        this.action = humanEntity -> {
-        };
+        this.action = (type, player) -> { };
     }
 
     /**
@@ -96,7 +96,7 @@ public class ButtonBuilder implements Button {
      * @param action the new index
      * @return the current ButtonBuilder instance
      */
-    public ButtonBuilder setAction(Consumer<Player> action) {
+    public ButtonBuilder setAction(Callback<ClickType, Player> action) {
         this.action = action;
 
         return this;

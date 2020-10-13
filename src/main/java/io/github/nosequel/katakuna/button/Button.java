@@ -2,6 +2,7 @@ package io.github.nosequel.katakuna.button;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -55,7 +56,7 @@ public interface Button {
      *
      * @return the action
      */
-    Consumer<Player> getAction();
+    Callback<ClickType, Player> getAction();
 
     /**
      * Get the amount of the item

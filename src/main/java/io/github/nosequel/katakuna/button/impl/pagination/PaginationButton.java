@@ -12,13 +12,13 @@ import java.util.function.Consumer;
 @Getter
 public class PaginationButton implements Button {
 
-    private int index;
-    private int amount = 1;
+    private final int index;
+    private final int amount = 1;
 
-    private String displayName;
-    private Material material;
-    private Consumer<Player> action;
-    private byte data;
+    private final String displayName;
+    private final Material material;
+    private final Consumer<Player> action;
+    private final byte data;
 
     /**
      * Constructor for creating a new PaginationButton

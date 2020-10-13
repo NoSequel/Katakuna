@@ -30,7 +30,7 @@ public class ButtonListener implements Listener {
 
             if (!$buttons.isEmpty()) {
                 event.setCancelled(true);
-                $buttons.forEach(button -> button.getAction().accept(player));
+                $buttons.forEach(button -> button.getAction().accept(event.getClick(), player));
             }
         }
     }
