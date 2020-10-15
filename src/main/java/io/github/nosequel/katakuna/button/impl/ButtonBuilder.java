@@ -142,15 +142,7 @@ public class ButtonBuilder implements Button {
      * @return the item stack
      */
     public ItemStack toItemStack() {
-        final ItemStack itemStack = new ItemStack(this.material, this.getAmount(), this.getData());
-        final ItemMeta meta = itemStack.getItemMeta();
-
-        meta.setDisplayName(this.getDisplayName());
-        meta.setLore(this.getLore());
-
-        itemStack.setItemMeta(meta);
-        this.itemStack = itemStack;
-
-        return itemStack;
+        this.itemStack = Button.super.toItemStack();
+        return this.itemStack;
     }
 }
