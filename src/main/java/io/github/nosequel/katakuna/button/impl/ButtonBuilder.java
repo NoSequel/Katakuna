@@ -47,6 +47,9 @@ public class ButtonBuilder implements Button {
     public ButtonBuilder(Button button) {
         this.material = button.getMaterial();
         this.action = button.getAction();
+        this.lore = button.getLore();
+        this.data = button.getData();
+        this.amount = button.getAmount();
         this.displayName = button.getDisplayName();
         this.index = button.getIndex();
     }
@@ -139,11 +142,8 @@ public class ButtonBuilder implements Button {
      * @return the item stack
      */
     public ItemStack toItemStack() {
-        if (this.itemStack == null) {
-            return Button.super.toItemStack();
-        }
-        final ItemStack itemStack = new ItemStack(this.itemStack.getType(), this.getAmount(), this.getData());
-        final ItemMeta meta = this.itemStack.getItemMeta();
+        final ItemStack itemStack = new ItemStack(this.material, this.getAmount(), this.getData());
+        final ItemMeta meta = itemStack.getItemMeta();
 
         meta.setDisplayName(this.getDisplayName());
         meta.setLore(this.getLore());

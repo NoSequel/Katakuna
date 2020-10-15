@@ -63,4 +63,14 @@ public class PaginatedMenu extends Menu {
                 .filter(button -> button.getIndex() == index)
                 .forEach(button -> button.getAction().accept(clickType, player));
     }
+
+    /**
+     * Set the current page the menu is at
+     *
+     * @param page the page
+     */
+    public void setPage(int page) {
+        this.page = Math.max(0, page);
+    }
+
 }

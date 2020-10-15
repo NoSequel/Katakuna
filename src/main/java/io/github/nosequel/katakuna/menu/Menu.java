@@ -42,6 +42,7 @@ public class Menu {
 
         if (oldMenu != null) {
             MenuHandler.get().getMenus().remove(oldMenu);
+            player.closeInventory();
         }
 
         MenuHandler.get().getMenus().add(this);
@@ -72,10 +73,13 @@ public class Menu {
         final Inventory inventory = this.inventory == null ? Bukkit.createInventory(null, this.getSize(), this.getTitle()) : this.inventory;
 
         this.clearMenu(inventory);
-        buttons.forEach(button -> inventory.setItem(button.getIndex(), button.toItemStack()));
+        buttons.stream()
+                .filter(button -> button != null && button.toItemStack() != null)
+                .forEach(button -> inventory.setItem(button.getIndex(), button.toItemStack()));
 
         if (inventory != this.inventory) {
             this.inventory = inventory;
+
             player.closeInventory();
             player.openInventory(inventory);
         } else {
@@ -112,7 +116,7 @@ public class Menu {
      * @param index     the index where the click had been performed
      */
     public void click(Player player, ClickType clickType, int index) {
-        this.buttons.stream()
+        this.getButtons().stream()
                 .filter(button -> button.getIndex() == index)
                 .forEach(button -> button.getAction().accept(clickType, player));
     }

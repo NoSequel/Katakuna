@@ -1,17 +1,12 @@
 package io.github.nosequel.katakuna.listeners;
 
 import io.github.nosequel.katakuna.MenuHandler;
-import io.github.nosequel.katakuna.button.Button;
 import io.github.nosequel.katakuna.menu.Menu;
-import io.github.nosequel.katakuna.menu.paginated.PaginatedMenu;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ButtonListener implements Listener {
 

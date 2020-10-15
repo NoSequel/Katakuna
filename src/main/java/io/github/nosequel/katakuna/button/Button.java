@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 public interface Button {
 
