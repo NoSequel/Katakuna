@@ -23,9 +23,11 @@ public class ButtonListener implements Listener {
         final Menu menu = menuHandler.findMenu(player);
 
         if (menu != null && event.getCurrentItem() != null) {
+            event.setCancelled(true);
             menu.click(player, event.getClick(), event.getSlot());
         }
     }
+
     @EventHandler
     public void onClose(InventoryCloseEvent event) {
         final Player player = (Player) event.getPlayer();
