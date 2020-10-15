@@ -20,7 +20,6 @@ public class ButtonBuilder implements Button {
     private List<String> lore = new ArrayList<>();
 
     private Material material;
-    private ItemStack itemStack;
 
     private String displayName = "";
     private byte data = 0;
@@ -54,8 +53,17 @@ public class ButtonBuilder implements Button {
         this.index = button.getIndex();
     }
 
+    /**
+     * Constructor for creating a new ButtonBuilder with the values pre set from a {@link ItemStack}
+     *
+     * @param itemStack the itemstack to load it from
+     */
     public ButtonBuilder(ItemStack itemStack) {
-        this.itemStack = itemStack;
+        this.material = itemStack.getType();
+        this.data = itemStack.getData().getData();
+        this.amount = itemStack.getAmount();
+        this.displayName = itemStack.getItemMeta().getDisplayName();
+        this.lore = itemStack.getItemMeta().getLore();
     }
 
     /**
@@ -134,15 +142,5 @@ public class ButtonBuilder implements Button {
         this.amount = amount;
 
         return this;
-    }
-
-    /**
-     * Change a Button into an ItemStack
-     *
-     * @return the item stack
-     */
-    public ItemStack toItemStack() {
-        this.itemStack = Button.super.toItemStack();
-        return this.itemStack;
     }
 }
