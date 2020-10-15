@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -103,4 +104,16 @@ public class Menu {
     public void onClose(InventoryCloseEvent event) {
     }
 
+    /**
+     * Executes the click action of an index
+     *
+     * @param player    the player who clicked
+     * @param clickType the type of click
+     * @param index     the index where the click had been performed
+     */
+    public void click(Player player, ClickType clickType, int index) {
+        this.buttons.stream()
+                .filter(button -> button.getIndex() == index)
+                .forEach(button -> button.getAction().accept(clickType, player));
+    }
 }

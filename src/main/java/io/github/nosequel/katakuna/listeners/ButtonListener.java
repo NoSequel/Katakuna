@@ -23,15 +23,7 @@ public class ButtonListener implements Listener {
         final Menu menu = menuHandler.findMenu(player);
 
         if (menu != null && event.getCurrentItem() != null) {
-            final List<Button> buttons = menu instanceof PaginatedMenu ? ((PaginatedMenu) menu).getButtonsInRange() : menu.getButtons();
-            final List<Button> $buttons = buttons.stream()
-                    .filter(button -> button.getIndex() == event.getSlot())
-                    .collect(Collectors.toList());
-
-            if (!$buttons.isEmpty()) {
-                event.setCancelled(true);
-                $buttons.forEach(button -> button.getAction().accept(event.getClick(), player));
-            }
+            menu.click(player, event.getClick(), event.getSlot());
         }
     }
     @EventHandler

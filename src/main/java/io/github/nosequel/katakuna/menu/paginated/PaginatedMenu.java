@@ -8,6 +8,7 @@ import io.github.nosequel.katakuna.menu.Menu;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,10 +39,7 @@ public class PaginatedMenu extends Menu {
 
     @Override
     public void updateMenu() {
-        final List<Button> buttons = new ArrayList<>(paginationButtons);
-        buttons.addAll(this.getButtonsInRange());
-
-        this.updateMenu(buttons);
+        this.updateMenu(this.getButtonsInRange());
     }
 
     /**
@@ -52,10 +50,17 @@ public class PaginatedMenu extends Menu {
     public List<Button> getButtonsInRange() {
         final List<Button> buttons = this.getButtons().stream()
                 .filter(button -> button.getIndex() <= getSize() * page && (button.getIndex() + 1 > getSize() * (page - 1)))
-                .map(button -> new ButtonBuilder(button).setIndex(button.getIndex() + 9)).collect(Collectors.toList());
+                .map(button -> new ButtonBuilder(button).setIndex((button.getIndex() + 9) - getSize() * page)).collect(Collectors.toList());
 
         buttons.addAll(this.paginationButtons);
 
         return buttons;
+    }
+
+    @Override
+    public void click(Player player, ClickType clickType, int index) {
+        this.getButtonsInRange().stream()
+                .filter(button -> button.getIndex() == index)
+                .forEach(button -> button.getAction().accept(clickType, player));
     }
 }
