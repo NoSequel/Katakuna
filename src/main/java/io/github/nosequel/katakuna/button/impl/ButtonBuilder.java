@@ -35,7 +35,8 @@ public class ButtonBuilder implements Button {
      */
     public ButtonBuilder(Material material) {
         this.material = material;
-        this.action = (type, player) -> { };
+        this.action = (type, player) -> {
+        };
     }
 
     /**
@@ -141,14 +142,15 @@ public class ButtonBuilder implements Button {
         if (this.itemStack == null) {
             return Button.super.toItemStack();
         }
-
+        final ItemStack itemStack = new ItemStack(this.itemStack.getType(), this.getAmount(), this.getData());
         final ItemMeta meta = this.itemStack.getItemMeta();
 
         meta.setDisplayName(this.getDisplayName());
         meta.setLore(this.getLore());
 
-        this.itemStack.setItemMeta(meta);
+        itemStack.setItemMeta(meta);
+        this.itemStack = itemStack;
 
-        return this.itemStack;
+        return itemStack;
     }
 }
