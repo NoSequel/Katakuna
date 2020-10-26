@@ -4,6 +4,7 @@ import io.github.nosequel.katakuna.button.Button;
 import io.github.nosequel.katakuna.button.Callback;
 import io.github.nosequel.katakuna.menu.paginated.PaginatedMenu;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,7 +13,8 @@ import org.bukkit.event.inventory.ClickType;
 @Getter
 public class PaginationButton implements Button {
 
-    private final int index;
+    private int index;
+
     private final int amount = 1;
 
     private final String displayName;
@@ -42,5 +44,10 @@ public class PaginationButton implements Button {
 
             menu.updateMenu();
         };
+    }
+
+    @Override
+    public void index(int index) {
+        this.index = index;
     }
 }

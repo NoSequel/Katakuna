@@ -77,6 +77,11 @@ public class ButtonBuilder implements Button {
         return this;
     }
 
+    @Override
+    public void index(int index) {
+        this.index = index;
+    }
+
     /**
      * Set the display name of the Button
      *

@@ -19,6 +19,13 @@ public interface Button {
     int getIndex();
 
     /**
+     * Set the index of the button in the menu
+     *
+     * @param index the index
+     */
+    void index(int index);
+
+    /**
      * Get the display name of the button
      *
      * @return the display name
