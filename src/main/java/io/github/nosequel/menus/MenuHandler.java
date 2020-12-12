@@ -1,25 +1,22 @@
-package io.github.nosequel.katakuna;
+package io.github.nosequel.menus;
 
-
-import io.github.nosequel.katakuna.listeners.ButtonListener;
-import io.github.nosequel.katakuna.menu.Menu;
+import io.github.nosequel.menus.listeners.ButtonListener;
+import io.github.nosequel.menus.menu.Menu;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
 public class MenuHandler {
 
     private static MenuHandler instance;
-
-    private final List<Menu> menus = new ArrayList<>();
+    private final Map<Player, Menu> menus = new HashMap<>();
 
     /**
      * Constructor for creating a new MenuHandler instance
@@ -39,17 +36,7 @@ public class MenuHandler {
      * @return the found menu
      */
     public Menu findMenu(Player player) {
-        final List<Menu> menus = this.menus.stream()
-                .filter(menu -> menu.getPlayer().equals(player))
-                .collect(Collectors.toList());
-
-        if (menus.size() > 1) {
-            throw new IllegalStateException("player has more than 1 menu (" + menus.size() + ")");
-        }
-
-        return menus.stream()
-                .findFirst()
-                .orElse(null);
+        return this.menus.get(player);
     }
 
     /**

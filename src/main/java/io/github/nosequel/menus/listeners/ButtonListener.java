@@ -1,7 +1,7 @@
-package io.github.nosequel.katakuna.listeners;
+package io.github.nosequel.menus.listeners;
 
-import io.github.nosequel.katakuna.MenuHandler;
-import io.github.nosequel.katakuna.menu.Menu;
+import io.github.nosequel.menus.MenuHandler;
+import io.github.nosequel.menus.menu.Menu;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,9 +17,8 @@ public class ButtonListener implements Listener {
         final Player player = (Player) event.getWhoClicked();
         final Menu menu = menuHandler.findMenu(player);
 
-        if (menu != null && event.getCurrentItem() != null) {
-            event.setCancelled(true);
-            menu.click(player, event.getClick(), event.getSlot());
+        if (menu != null && event.getCurrentItem() != null && player.getOpenInventory().getTopInventory() != null) {
+            event.setCancelled(menu.click(event.getClick(), event.getSlot()));
         }
     }
 
@@ -30,7 +29,6 @@ public class ButtonListener implements Listener {
 
         if (menu != null) {
             menu.onClose(event);
-            menuHandler.getMenus().remove(menu);
         }
     }
 }

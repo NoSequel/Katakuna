@@ -1,7 +1,7 @@
-package io.github.nosequel.katakuna.menu;
+package io.github.nosequel.menus.menu;
 
-import io.github.nosequel.katakuna.MenuHandler;
-import io.github.nosequel.katakuna.button.Button;
+import io.github.nosequel.menus.MenuHandler;
+import io.github.nosequel.menus.button.Button;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -14,10 +14,11 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
-public class Menu {
+public abstract class Menu {
 
     private final Player player;
     private final String title;
@@ -38,14 +39,7 @@ public class Menu {
         this.title = title;
         this.size = size;
 
-        final Menu oldMenu = MenuHandler.get().findMenu(player);
-
-        if (oldMenu != null) {
-            MenuHandler.get().getMenus().remove(oldMenu);
-            player.closeInventory();
-        }
-
-        MenuHandler.get().getMenus().add(this);
+        MenuHandler.get().getMenus().put(player, this);
     }
 
     /**
@@ -101,23 +95,30 @@ public class Menu {
     }
 
     /**
+     * Executes the click action of an index
+     *
+     * @param clickType the type of click
+     * @param index     the index where the click had been performed
+     * @return whether the click event should be cancelled or not
+     */
+    public boolean click(ClickType clickType, int index) {
+        final Optional<Button> button = this.getButtons().stream()
+                .filter(current -> current.getIndex() == index)
+                .findFirst();
+
+        if (button.isPresent()) {
+            return button.get().getClickAction().apply(clickType);
+        }
+
+        return false;
+    }
+
+
+    /**
      * This method gets called whenever the player closes the inventory
      *
      * @param event the close event
      */
-    public void onClose(InventoryCloseEvent event) {
-    }
+    public abstract void onClose(InventoryCloseEvent event);
 
-    /**
-     * Executes the click action of an index
-     *
-     * @param player    the player who clicked
-     * @param clickType the type of click
-     * @param index     the index where the click had been performed
-     */
-    public void click(Player player, ClickType clickType, int index) {
-        this.getButtons().stream()
-                .filter(button -> button.getIndex() == index)
-                .forEach(button -> button.getAction().accept(clickType, player));
-    }
 }
