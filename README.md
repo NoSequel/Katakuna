@@ -4,19 +4,27 @@ Light-weight and extensive Menu API made with the Spigot API
 # Example Usage
 ``Creating a Menu``
 ```java
-public class ExampleMenu implements Menu {
+import io.github.nosequel.menus.menu.PaginatedMenu;
+import org.bukkit.Material;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class ExampleMenu extends PaginatedMenu {
     
     public ExampleMenu(Player player) {
         super(player, "title", 9);
     }
  
     public List<Button> getButtons() {        
-        return Arrays.asList(
-            new ButtonBuilder(Material.COMPASS)
-                .setDisplayName("Example Item")
-                .setLore("Example Lore")
-                .setAction(player -> player.sendMessage("You clicked on an example item"))
-        );
+        final List<Button> buttons = new ArrayList<>();
+
+        for(int i = 0; i < 50; i++) {
+            buttons.add(new ButtonBuilder(i, Material.COMPASS).displayName("Example Item").lore("Example Lore").action(type -> true));
+        }
+
+        return buttons;
     } 
 }
 ```

@@ -72,7 +72,7 @@ public class ButtonBuilder extends Button {
      * @param clickAction the new value
      * @return the current button builder instance
      */
-    public ButtonBuilder clickAction(Function<ClickType, Boolean> clickAction) {
+    public ButtonBuilder action(Function<ClickType, Boolean> clickAction) {
         super.setClickAction(clickAction);
         return this;
     }
