@@ -10,8 +10,6 @@ import java.util.function.Function;
 @Getter
 public class ButtonBuilder extends Button {
 
-    private int index;
-
     /**
      * Constructor for making a new button builder object from a {@link ItemStack}
      * Calls super constructor from {@link Button}
@@ -51,7 +49,7 @@ public class ButtonBuilder extends Button {
      * @return the current button builder instance
      */
     public ButtonBuilder index(int index) {
-        this.index = index;
+        super.setIndex(index);
         return this;
     }
 

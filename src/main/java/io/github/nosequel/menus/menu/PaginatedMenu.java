@@ -1,7 +1,6 @@
 package io.github.nosequel.menus.menu;
 
 import io.github.nosequel.menus.button.Button;
-
 import io.github.nosequel.menus.button.pagination.NextButton;
 import io.github.nosequel.menus.button.pagination.PreviousButton;
 import lombok.Getter;
@@ -18,11 +17,11 @@ import java.util.stream.Collectors;
 @Setter
 public abstract class PaginatedMenu extends Menu {
 
-    private int page;
+    private int page = 1;
 
     private final List<Button> paginationButtons = new ArrayList<Button>() {{
-        this.add(new PreviousButton(0, PaginatedMenu.this));
-        this.add(new NextButton(8, PaginatedMenu.this));
+        this.add(new PreviousButton(PaginatedMenu.this));
+        this.add(new NextButton(PaginatedMenu.this));
     }};
 
     /**
@@ -48,7 +47,7 @@ public abstract class PaginatedMenu extends Menu {
     public List<Button> getButtonsInRange() {
         final List<Button> buttons = this.getButtons().stream()
                 .filter(button -> button.getIndex() >= ((page - 1) * this.getSize()) && button.getIndex() < (page * getSize()) - 9)
-                .peek(button -> button.updateIndex(button.getIndex() - ((getSize()) * (page - 1) - 9))).collect(Collectors.toList());
+                .peek(button -> button.setIndex(button.getIndex() - ((getSize()) * (page - 1) - 9))).collect(Collectors.toList());
 
         buttons.addAll(this.paginationButtons);
 
@@ -74,6 +73,6 @@ public abstract class PaginatedMenu extends Menu {
      * @param page the page
      */
     public void setPage(int page) {
-        this.page = Math.max(0, page);
+        this.page = Math.max(1, page);
     }
 }

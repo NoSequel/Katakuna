@@ -16,11 +16,10 @@ public class PreviousButton extends Button {
      * Constructor for making a new next button object
      * The constructor calls the super method from {@link Button}
      *
-     * @param index     the index of the button
-     * @param menu      the menu instance which it's made from
+     * @param menu the menu instance which it's made from
      */
-    public PreviousButton(int index, PaginatedMenu menu) {
-        super(index, Material.CARPET);
+    public PreviousButton(PaginatedMenu menu) {
+        super(0, Material.CARPET);
         this.menu = menu;
         this.setDisplayName(ChatColor.GRAY + "Previous Button");
     }
@@ -28,7 +27,7 @@ public class PreviousButton extends Button {
     @Override
     public Function<ClickType, Boolean> getClickAction() {
         return type -> {
-            menu.setPage(menu.getPage()+1);
+            menu.setPage(Math.max(1, menu.getPage()-1));
             menu.updateMenu();
             return true;
         };

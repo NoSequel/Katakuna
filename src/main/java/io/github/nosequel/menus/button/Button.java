@@ -1,6 +1,7 @@
 package io.github.nosequel.menus.button;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.function.Function;
 
 @Getter
+@Setter
 public abstract class Button {
 
     private final MaterialData materialData;
@@ -66,17 +68,6 @@ public abstract class Button {
      */
     public void setClickAction(Function<ClickType, Boolean> action) {
         this.clickAction = action;
-    }
-
-    /**
-     * Update the index of the button
-     *
-     * @param i the new index
-     * @return the current button
-     */
-    public Button updateIndex(int i) {
-        this.index = i;
-        return this;
     }
 
     /**
