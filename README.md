@@ -17,15 +17,22 @@ public class ExampleMenu extends PaginatedMenu {
         super(player, "title", 9);
     }
  
+    @Override
     public List<Button> getButtons() {        
         final List<Button> buttons = new ArrayList<>();
 
         for(int i = 0; i < 50; i++) {
-            buttons.add(new ButtonBuilder(i, Material.COMPASS).displayName("Example Item").lore("Example Lore").action(type -> true));
+            buttons.add(new ButtonBuilder(i, Material.COMPASS).displayName("Example Item").lore("Example Lore #" + i).action(type -> true));
         }
 
         return buttons;
     } 
+    
+    @Override
+    public void onClose(InventoryCloseEvent event) {
+        event.getPlayer().sendMessage("Closing inventory,,, sir,,,")
+    }
+    
 }
 ```
 
