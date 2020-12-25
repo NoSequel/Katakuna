@@ -38,8 +38,7 @@ public abstract class Menu {
         this.player = player;
         this.title = title;
         this.size = size;
-
-        MenuHandler.get().getMenus().put(player, this);
+        this.registerMenu();
     }
 
     /**
@@ -66,7 +65,9 @@ public abstract class Menu {
     public void updateMenu(List<Button> buttons) {
         final Inventory inventory = this.inventory == null ? Bukkit.createInventory(null, this.getSize(), this.getTitle()) : this.inventory;
 
+        this.registerMenu();
         this.clearMenu(inventory);
+
         buttons.stream()
                 .filter(button -> button != null && button.toItemStack() != null)
                 .forEach(button -> inventory.setItem(button.getIndex(), button.toItemStack()));
@@ -113,6 +114,14 @@ public abstract class Menu {
         return false;
     }
 
+    /**
+     * Register a {@link Menu} to the map of menus
+     *
+     * @return the menu instance
+     */
+    public Menu registerMenu() {
+        return MenuHandler.get().getMenus().put(this.getPlayer(), this);
+    }
 
     /**
      * This method gets called whenever the player closes the inventory

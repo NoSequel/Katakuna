@@ -29,8 +29,9 @@ public class ExampleMenu extends PaginatedMenu {
     } 
     
     @Override
-    public void onClose(InventoryCloseEvent event) {
-        event.getPlayer().sendMessage("Closing inventory,,, sir,,,")
+    public void onClose(InventoryCloseEvent event) {   
+        // unregister this menu, otherwise buttons will still work even when the menu is closed.
+        MenuHandler.get().getMenus().remove(event.getPlayer());
     }
     
 }
