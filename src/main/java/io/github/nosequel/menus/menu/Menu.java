@@ -65,7 +65,6 @@ public abstract class Menu {
     public void updateMenu(List<Button> buttons) {
         final Inventory inventory = this.inventory == null ? Bukkit.createInventory(null, this.getSize(), this.getTitle()) : this.inventory;
 
-        this.registerMenu();
         this.clearMenu(inventory);
 
         buttons.stream()
@@ -80,6 +79,8 @@ public abstract class Menu {
         } else {
             player.updateInventory();
         }
+
+        this.registerMenu();
     }
 
     /**
