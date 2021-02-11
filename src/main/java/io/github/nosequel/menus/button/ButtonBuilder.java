@@ -85,4 +85,16 @@ public class ButtonBuilder extends Button {
         super.setLore(lore);
         return this;
     }
+
+    /**
+     * Set the new amount of the button
+     *
+     * @param amount the amount
+     * @return the current button builder instance
+     */
+    public ButtonBuilder amount(int amount) {
+        this.setAmount(amount);
+        return this;
+    }
+
 }

@@ -19,6 +19,8 @@ public abstract class Button {
     private final ItemMeta itemMeta;
 
     private int index;
+    private int amount = 1;
+
     private Function<ClickType, Boolean> clickAction;
 
     /**
@@ -71,12 +73,23 @@ public abstract class Button {
     }
 
     /**
+     * Set the amount of the button
+     *
+     * @param amount the new amount
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    /**
      * Method for converting a button to a {@link ItemStack}
      *
      * @return the converted itemstack
      */
     public ItemStack toItemStack() {
         ItemStack itemStack = this.materialData.toItemStack();
+
+        itemStack.setAmount(this.amount);
         itemStack.setItemMeta(this.itemMeta);
 
         return itemStack;
