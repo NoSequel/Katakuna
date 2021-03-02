@@ -47,7 +47,7 @@ public abstract class Menu {
      * @return the size
      */
     public int getSize() {
-        return Math.min(this.size, 45);
+        return Math.min(this.size, 54);
     }
 
     /**
