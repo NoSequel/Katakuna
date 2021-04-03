@@ -108,7 +108,7 @@ public abstract class Menu {
                 .filter(current -> current.getIndex() == index)
                 .findFirst();
 
-        if (button.isPresent()) {
+        if (button.isPresent() && button.get().getClickAction() != null) {
             return button.get().getClickAction().apply(clickType);
         }
 
