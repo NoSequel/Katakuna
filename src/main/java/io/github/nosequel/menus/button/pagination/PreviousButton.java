@@ -19,7 +19,7 @@ public class PreviousButton extends Button {
      * @param menu the menu instance which it's made from
      */
     public PreviousButton(PaginatedMenu menu) {
-        super(0, Material.CARPET);
+        super(0, Material.RED_CARPET);
         this.menu = menu;
         this.setDisplayName(ChatColor.GRAY + "Previous Button");
     }
